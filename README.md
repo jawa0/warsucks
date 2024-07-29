@@ -3,7 +3,18 @@ WARSUCKS- WAR Sucks Universal Conflict Kinetics Simulator
 
 Actually dynamics, not just kinetics. But Kinetics sounded cooler.
 
-ROADMAP:
+## Build and Run
+### Build Sim Server (Docker container)
+
+    cd servesim
+    build -t servesim .
+
+### Run Sim Server
+
+    docker run -it servesim
+
+
+## Roadmap:
 - create simulator program
 - package simulator in docker container
 - create viewer program
