@@ -28,6 +28,7 @@ class SimulationViewer {
     private particles: THREE.Mesh[] = [];
     private simulationLog: SimulationLog | null = null;
     private currentFrame = 0;
+    private clock: THREE.Clock;
 
     constructor() {
         this.scene = new THREE.Scene();
@@ -44,6 +45,8 @@ class SimulationViewer {
 
         const fileInput = document.getElementById('fileInput') as HTMLInputElement;
         fileInput.addEventListener('change', (event) => this.loadSimulationLog(event));
+
+        this.clock = new THREE.Clock();
 
         this.animate();
     }
@@ -88,17 +91,24 @@ class SimulationViewer {
     private updateParticles() {
         if (!this.simulationLog) return;
 
-        const frame = this.simulationLog.frames[this.currentFrame];
-        for (let i = 0; i < this.particles.length; i++) {
-            const position = frame.particles[i].position;
-            this.particles[i].position.set(position.x, position.y, position.z);
-        }
+        const deltaTime = this.clock.getDelta() * 2; // Double the speed
+        const frameDuration = this.simulationLog.config.simulationParameters.timeStep;
+        const framesToAdvance = Math.floor(deltaTime / frameDuration);
 
-        this.currentFrame = (this.currentFrame + 1) % this.simulationLog.frames.length;
+        for (let i = 0; i < framesToAdvance; i++) {
+            const frame = this.simulationLog.frames[this.currentFrame];
+            for (let j = 0; j < this.particles.length; j++) {
+                const position = frame.particles[j].position;
+                this.particles[j].position.set(position.x, position.y, position.z);
+            }
+
+            this.currentFrame = (this.currentFrame + 1) % this.simulationLog.frames.length;
+        }
 
         const infoElement = document.getElementById('info');
         if (infoElement) {
-            infoElement.textContent = `Time: ${frame.time.toFixed(3)}s`;
+            const currentTime = this.simulationLog.frames[this.currentFrame].time;
+            infoElement.textContent = `Time: ${currentTime.toFixed(3)}s`;
         }
     }
 
