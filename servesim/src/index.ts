@@ -116,28 +116,28 @@ function loadSimulationConfig(filePath: string): SimulationConfig {
 }
 
 function main() {
-    const inputDir = '/usr/src/app/input';
-    const outputDir = '/usr/src/app/output';
-    const configFile = path.join(inputDir, 'sim_config.json');
-    const logFile = path.join(outputDir, 'simulation_log.json');
+  const inputDir = path.join(__dirname, '..', 'input');
+  const outputDir = path.join(__dirname, '..', 'output');
+  const configFile = path.join(inputDir, 'sim_config.json');
+  const logFile = path.join(outputDir, 'simulation_log.json');
 
-    console.log('*** WARSUCKS - WAR Sucks Universal Conflict Kinetics Simulator ***\n');
+  console.log('*** WARSUCKS - WAR Sucks Universal Conflict Kinetics Simulator ***\n');
 
-    try {
-        // Ensure output directory exists
-        if (!fs.existsSync(outputDir)) {
-            fs.mkdirSync(outputDir, { recursive: true });
-        }
+  try {
+      // Ensure output directory exists
+      if (!fs.existsSync(outputDir)) {
+          fs.mkdirSync(outputDir, { recursive: true });
+      }
 
-        const config = loadSimulationConfig(configFile);
-        const simulation = new PhysicsSimulation(config);
-        console.log('Starting simulation...');
-        simulation.run();
-        console.log('Simulation completed.');
-        simulation.saveLog(logFile);
-    } catch (error) {
-        console.error('Error running simulation:', error);
-    }
+      const config = loadSimulationConfig(configFile);
+      const simulation = new PhysicsSimulation(config);
+      console.log('Starting simulation...');
+      simulation.run();
+      console.log('Simulation completed.');
+      simulation.saveLog(logFile);
+  } catch (error) {
+      console.error('Error running simulation:', error);
+  }
 }
 
 main();
