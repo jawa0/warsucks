@@ -1,5 +1,19 @@
 {
     "simulationParameters": {
-        "gravity": 9.81
-    }
+        "gravity": -9.81,
+        "timeStep": 0.001,
+        "duration": 10
+    },
+    "particles": [
+        {
+            "mass": 1.0,
+            "position": [0, 0, 10],
+            "velocity": [1, 0, 0]
+        },
+        {
+            "mass": 2.0,
+            "position": [5, 5, 5],
+            "velocity": [-1, 0, 1]
+        }
+    ]
 }
