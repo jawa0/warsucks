@@ -7,16 +7,26 @@ Actually dynamics, not just kinetics. But Kinetics sounded cooler.
 ### Build Sim Server (Docker container)
 
     cd servesim
-    build -t servesim .
+    docker build -t servesim .
 
 ### Run Sim Server
+This assumes that you are in the project root dir, not in the servesim dir. Adjust as necessary.
+We mount the "input" folder as a volume, accessible from inside the Docker container.
 
-    docker run -it servesim
+Unix / macOS:
+
+    docker run -it -v $(pwd)/servesim/input:/usr/src/app/input servesim
+Windows Command Prompt (cmd):
+
+    docker run -it -v %cd%\servesim\input:/usr/src/app/input servesim
+Windows PowerShell:
+    
+    docker run -it -v ${PWD}\input:/usr/src/app/input servesim
 
 
 ## Roadmap:
 - create simulator program
-- package simulator in docker container
+- ~~package simulator in docker container~~
 - create viewer program
   - start with WebGL
 - Newtonian Dynamics / Classical Mechanics
