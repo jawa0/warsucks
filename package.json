@@ -1,0 +1,10 @@
+{
+    "name": "warsucks",
+    "version": "1.0.0",
+    "scripts": {
+        "build:servesim": "cd servesim && npm run build",
+        "start:servesim": "cd servesim && npm start",
+        "build:viewer": "cd viewer && npm run build",
+        "start:viewer": "cd viewer && npm start"
+    }
+  }
