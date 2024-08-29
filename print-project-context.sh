@@ -26,6 +26,10 @@ find . -type f \
         print_dashes
         echo "${file:2}:"
         print_dashes
-        cat "$file"
+        if [[ "$file" == *"/output/"* ]] || [[ "$(basename "$file")" == "package-lock.json" ]]; then
+            echo "..."
+        else
+            cat "$file"
+        fi
         echo -e "\n"
     done
