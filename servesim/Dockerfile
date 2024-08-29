@@ -10,7 +10,7 @@ COPY . .
 
 RUN npm run build
 
-# Create a directory for input files if it doesn't exist
-RUN mkdir -p /usr/src/app/input
+# Create directories for input and output files
+RUN mkdir -p /usr/src/app/input /usr/src/app/output
 
 CMD [ "npm", "start" ]

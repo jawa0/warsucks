@@ -18,7 +18,7 @@ Unix / macOS:
     docker run -it -v $(pwd)/servesim/input:/usr/src/app/input servesim
 Windows Command Prompt (cmd):
 
-    docker run -it -v %cd%\servesim\input:/usr/src/app/input servesim
+    docker run -it -v %cd%\servesim\input:/usr/src/app/input -v %cd%\servesim\output:/usr/src/app/output servesim
 Windows PowerShell:
     
     docker run -it -v ${PWD}\input:/usr/src/app/input servesim
